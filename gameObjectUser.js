@@ -2,6 +2,7 @@ let shots = [];
 let overheated = false;
 let resetTimer;
 let counter = 0;
+let enemies = 0;
 
 document.getElementById("shootButton").addEventListener("click", shoot);
 
@@ -20,12 +21,16 @@ function shoot() {
 
     counter++;
 
-    if (counter % 3 == 0) {
-        console.log("Counter: " + counter / 3);
+    if (counter == 3) {
+        counter = 0;
+        enemies++;
     }
 
     document.getElementById("shots").innerText =
         "Shots: " + shots.length + " / 10";
+
+    document.getElementById("status").innerText =
+        "Enemies: " + enemies;
 
     if (shots.length >= 10) {
         overheat();
@@ -49,9 +54,10 @@ function overheat() {
     setTimeout(function() {
         overheated = false;
         shots = [];
+        counter = 0;
 
         document.getElementById("shootButton").disabled = false;
-        document.getElementById("status").innerText = "Weapon Ready";
+        document.getElementById("status").innerText = "Enemies: " + enemies;
         document.getElementById("shots").innerText = "Shots: 0 / 10";
 
     }, 5000);
