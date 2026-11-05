@@ -1,6 +1,7 @@
 let shots = [];
 let overheated = false;
 let resetTimer;
+let counter = 0;
 
 document.getElementById("shootButton").addEventListener("click", shoot);
 
@@ -16,6 +17,12 @@ function shoot() {
     shots = shots.filter(time => now - time < 5000);
 
     shots.push(now);
+
+    counter++;
+
+    if (counter % 3 == 0) {
+        console.log("Counter: " + counter / 3);
+    }
 
     document.getElementById("shots").innerText =
         "Shots: " + shots.length + " / 10";
